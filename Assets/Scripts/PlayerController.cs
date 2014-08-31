@@ -19,8 +19,14 @@ public class PlayerController : MonoBehaviour {
 	private bool doubleFire=false;
 	private float expireTime;
 	private float originalFireRate;
+	private bool shieldVisible=true;
+	private GameObject shield;
 
 	void Start() {
+		  shield = GameObject.FindGameObjectWithTag("Shield");
+	
+		toggleShield();
+
 		originalFireRate = fireRate;
 	}
 
@@ -29,8 +35,13 @@ public class PlayerController : MonoBehaviour {
 		
 		foreach (GameObject go in gameObjects) {
 			go.GetComponent<DestroyByContact>().DestroyMe();
-			
 		}
+	}
+
+	public void toggleShield() {
+		shieldVisible = !shieldVisible;
+
+		shield.SetActive(shieldVisible);
 	}
 
 	void Update() {
@@ -47,9 +58,10 @@ public class PlayerController : MonoBehaviour {
 			DestroyAsteroids("Asteroid2");
 		}
 
-		if (Helpers.SheildBombButtonDown()) {
+		if (Helpers.SheildButtonDown()) {
 			// put up shields
-			
+			Debug.Log("hello");
+			toggleShield();
 		}
 
 		if (Helpers.FireButtonDown() && Time.time > nextFire) {

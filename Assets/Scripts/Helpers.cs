@@ -13,7 +13,7 @@ public static class Helpers
 		return (Input.GetButtonDown("Fire2"));
 	}
 
-	public static bool SheildBombButtonDown ()
+	public static bool SheildButtonDown ()
 	{
 		return (Input.GetButtonDown("Fire3"));
 	}

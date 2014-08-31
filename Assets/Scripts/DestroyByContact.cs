@@ -50,19 +50,21 @@ public class DestroyByContact : MonoBehaviour
 		if (gameObject.tag == "Asteroid2") {
 			playerController.DoubleFire ();
 		}
-
+			
 		if (other.tag == "Player") {
 			Instantiate (playerExplosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
 
 			gameController.GameOver ();
 
 			Instantiate (gameOverEffects, new Vector3 (0, 0, 0), Quaternion.identity);
-
 		}
 
 		DestroyMe();
 
-		Destroy (other.gameObject);
+		// don't destroy our field
+		if (other.tag != "Shield") {
+		  Destroy (other.gameObject);
+		}
 	}
 
 }
