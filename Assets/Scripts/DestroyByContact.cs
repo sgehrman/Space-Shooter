@@ -35,12 +35,17 @@ public class DestroyByContact : MonoBehaviour
 		}
 	}
 
+	public void DestroyMe() {
+		Instantiate (explosion, transform.position, transform.rotation);
+		gameController.AddScore (scoreValue);
+		Destroy (gameObject);
+	}
+
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.tag == "Boundary") {
 			return;
 		}
-		Instantiate (explosion, transform.position, transform.rotation);
 
 		if (gameObject.tag == "Asteroid2") {
 			playerController.DoubleFire ();
@@ -55,9 +60,9 @@ public class DestroyByContact : MonoBehaviour
 
 		}
 
-		gameController.AddScore (scoreValue);
+		DestroyMe();
+
 		Destroy (other.gameObject);
-		Destroy (gameObject);
 	}
 
 }

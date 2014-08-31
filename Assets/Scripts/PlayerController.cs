@@ -24,12 +24,32 @@ public class PlayerController : MonoBehaviour {
 		originalFireRate = fireRate;
 	}
 
+	void DestroyAsteroids(String tag) {
+		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+		
+		foreach (GameObject go in gameObjects) {
+			go.GetComponent<DestroyByContact>().DestroyMe();
+			
+		}
+	}
+
 	void Update() {
 		if (doubleFire) {
 			if (Time.time > expireTime) {
 				fireRate = originalFireRate;
 				doubleFire = false;
 			}
+		}
+
+		if (Helpers.SmartBombButtonDown()) {
+			// destroy everything
+			DestroyAsteroids("Asteroid");
+			DestroyAsteroids("Asteroid2");
+		}
+
+		if (Helpers.SheildBombButtonDown()) {
+			// put up shields
+			
 		}
 
 		if (Helpers.FireButtonDown() && Time.time > nextFire) {
